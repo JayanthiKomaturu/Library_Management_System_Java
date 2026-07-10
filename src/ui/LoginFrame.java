@@ -1,5 +1,6 @@
 package ui;
-
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 import java.awt.*;
 
@@ -50,6 +51,30 @@ public class LoginFrame extends JFrame {
         loginButton = new JButton("Login");
         loginButton.setBounds(180,200,100,35);
         add(loginButton);
+
+
+        loginButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                String username = usernameField.getText();
+                String password = new String(passwordField.getPassword());
+
+                if (username.equals("admin") && password.equals("admin123")) {
+
+                    JOptionPane.showMessageDialog(null, "Login Successful!");
+
+                    new Dashboard();
+
+                    dispose();
+
+                } else {
+
+                    JOptionPane.showMessageDialog(null, "Invalid Username or Password!");
+
+                }
+            }
+        });
 
         setVisible(true);
     }
