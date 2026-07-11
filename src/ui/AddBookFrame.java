@@ -2,6 +2,10 @@ package ui;
 
 import javax.swing.*;
 import java.awt.*;
+import model.Book;
+import dao.BookDAO;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class AddBookFrame extends JFrame {
 
@@ -59,6 +63,37 @@ public class AddBookFrame extends JFrame {
         saveButton.setBounds(170,270,130,35);
         add(saveButton);
 
+        saveButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String title = titleField.getText();
+                String author = authorField.getText();
+                String category = categoryField.getText();
+                int quantity = Integer.parseInt(quantityField.getText());
+
+                Book book = new Book();
+
+                book.setTitle(title);
+                book.setAuthor(author);
+                book.setCategory(category);
+                book.setQuantity(quantity);
+
+                BookDAO dao = new BookDAO();
+
+                boolean status = dao.addBook(book);
+
+                if (status) {
+
+                    JOptionPane.showMessageDialog(null, "Book Added Successfully!");
+
+                } else {
+
+                    JOptionPane.showMessageDialog(null, "Failed to Add Book!");
+
+                }
+            }
+        });
         setVisible(true);
 
     }

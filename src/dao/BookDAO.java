@@ -23,10 +23,12 @@ public class BookDAO {
             ps.setInt(4, book.getQuantity());
 
             int rows = ps.executeUpdate();
+            System.out.println("Rows inserted = " + rows);
 
             return rows > 0;
 
         } catch (Exception e) {
+            System.out.println("Error while adding book:");
             e.printStackTrace();
             return false;
         }
