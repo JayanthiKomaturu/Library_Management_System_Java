@@ -60,4 +60,22 @@ public class BookDAO {
             e.printStackTrace();
         }
     }
+
+    public ResultSet getAllBooks() {
+
+        String query = "SELECT * FROM books";
+
+        try {
+
+            Connection con = DBConnection.getConnection();
+
+            PreparedStatement ps = con.prepareStatement(query);
+
+            return ps.executeQuery();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

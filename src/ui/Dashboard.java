@@ -2,6 +2,8 @@ package ui;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Dashboard extends JFrame {
 
@@ -41,6 +43,16 @@ public class Dashboard extends JFrame {
             public void actionPerformed(java.awt.event.ActionEvent e) {
 
                 new AddBookFrame();
+
+            }
+        });
+
+        viewBookButton.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                new ViewBooksFrame();
 
             }
         });
