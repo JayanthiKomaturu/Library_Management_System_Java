@@ -78,4 +78,28 @@ public class BookDAO {
             return null;
         }
     }
+
+    public boolean deleteBook(int bookId) {
+
+        String query = "DELETE FROM books WHERE book_id = ?";
+
+        try {
+
+            Connection con = DBConnection.getConnection();
+
+            PreparedStatement ps = con.prepareStatement(query);
+
+            ps.setInt(1, bookId);
+
+            int rows = ps.executeUpdate();
+
+            return rows > 0;
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
+            return false;
+        }
+    }
 }

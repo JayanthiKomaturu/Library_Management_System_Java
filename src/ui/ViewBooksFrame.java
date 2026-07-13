@@ -10,6 +10,7 @@ public class ViewBooksFrame extends JFrame {
 
     JTable table;
     DefaultTableModel model;
+    JButton deleteButton;
 
     public ViewBooksFrame() {
 
@@ -36,9 +37,43 @@ public class ViewBooksFrame extends JFrame {
         JScrollPane scrollPane = new JScrollPane(table);
 
         add(scrollPane, BorderLayout.CENTER);
-        loadBooks();
-        setVisible(true);
 
+        deleteButton = new JButton("Delete Book");
+        add(deleteButton, BorderLayout.SOUTH);
+
+        loadBooks();
+
+        deleteButton.addActionListener(e -> {
+
+            int selectedRow = table.getSelectedRow();
+
+            if (selectedRow == -1) {
+
+                JOptionPane.showMessageDialog(this, "Please select a book.");
+                return;
+            }
+            int bookId = (int) model.getValueAt(selectedRow, 0);
+
+            System.out.println("Selected Book ID = " + bookId);
+
+            BookDAO dao = new BookDAO();
+
+            boolean status = dao.deleteBook(bookId);
+
+            if (status) {
+
+                JOptionPane.showMessageDialog(this, "Book Deleted Successfully!");
+                model.setRowCount(0);
+
+                loadBooks();
+            } else {
+
+                JOptionPane.showMessageDialog(this, "Failed to Delete Book!");
+
+            }
+        });
+
+        setVisible(true);
     }
 
     private void loadBooks() {
