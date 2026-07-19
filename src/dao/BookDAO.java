@@ -102,4 +102,30 @@ public class BookDAO {
             return false;
         }
     }
+    public boolean updateBook(Book book) {
+
+        String query = "UPDATE books SET title=?, author=?, category=?, quantity=? WHERE book_id=?";
+
+        try {
+
+            Connection con = DBConnection.getConnection();
+
+            PreparedStatement ps = con.prepareStatement(query);
+
+            ps.setString(1, book.getTitle());
+            ps.setString(2, book.getAuthor());
+            ps.setString(3, book.getCategory());
+            ps.setInt(4, book.getQuantity());
+            ps.setInt(5, book.getBookId());
+
+            int rows = ps.executeUpdate();
+
+            return rows > 0;
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

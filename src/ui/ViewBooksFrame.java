@@ -10,6 +10,7 @@ public class ViewBooksFrame extends JFrame {
 
     JTable table;
     DefaultTableModel model;
+    JButton updateButton;
     JButton deleteButton;
 
     public ViewBooksFrame() {
@@ -38,8 +39,15 @@ public class ViewBooksFrame extends JFrame {
 
         add(scrollPane, BorderLayout.CENTER);
 
+        JPanel buttonPanel = new JPanel();
+
+        updateButton = new JButton("Update Book");
         deleteButton = new JButton("Delete Book");
-        add(deleteButton, BorderLayout.SOUTH);
+
+        buttonPanel.add(updateButton);
+        buttonPanel.add(deleteButton);
+
+        add(buttonPanel, BorderLayout.SOUTH);
 
         loadBooks();
 
@@ -71,6 +79,26 @@ public class ViewBooksFrame extends JFrame {
                 JOptionPane.showMessageDialog(this, "Failed to Delete Book!");
 
             }
+        });
+
+        updateButton.addActionListener(e -> {
+
+            int selectedRow = table.getSelectedRow();
+
+            if (selectedRow == -1) {
+
+                JOptionPane.showMessageDialog(this, "Please select a book.");
+                return;
+            }
+
+            int bookId = (int) model.getValueAt(selectedRow, 0);
+            String title = (String) model.getValueAt(selectedRow, 1);
+            String author = (String) model.getValueAt(selectedRow, 2);
+            String category = (String) model.getValueAt(selectedRow, 3);
+            int quantity = (int) model.getValueAt(selectedRow, 4);
+
+            new UpdateBookFrame(bookId, title, author, category, quantity);
+
         });
 
         setVisible(true);
