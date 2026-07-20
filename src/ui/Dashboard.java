@@ -11,6 +11,7 @@ public class Dashboard extends JFrame {
     JButton viewBookButton;
     JButton logoutButton;
     JButton searchBookButton;
+    JButton issueBookButton;
 
     public Dashboard() {
 
@@ -41,6 +42,13 @@ public class Dashboard extends JFrame {
         searchBookButton.setBounds(100, 180, 200, 40);
         add(searchBookButton);
 
+
+        issueBookButton = new JButton("Issue Book");
+        issueBookButton.setBounds(320,180,180,40);
+        add(issueBookButton);
+
+
+
         addBookButton.addActionListener(new java.awt.event.ActionListener() {
 
             @Override
@@ -61,10 +69,14 @@ public class Dashboard extends JFrame {
             }
         });
 
-
-
         searchBookButton.addActionListener(e -> {
             new SearchBookFrame();
+        });
+
+        issueBookButton.addActionListener(e -> {
+
+            new IssueBookFrame();
+
         });
         setVisible(true);
     }
