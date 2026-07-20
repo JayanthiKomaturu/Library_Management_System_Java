@@ -128,4 +128,25 @@ public class BookDAO {
             return false;
         }
     }
+
+    public ResultSet searchBook(String title) {
+
+        String query = "SELECT * FROM books WHERE title LIKE ?";
+
+        try {
+
+            Connection con = DBConnection.getConnection();
+
+            PreparedStatement ps = con.prepareStatement(query);
+
+            ps.setString(1, "%" + title + "%");
+
+            return ps.executeQuery();
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
