@@ -28,7 +28,7 @@ public class IssueBookFrame extends JFrame {
     public IssueBookFrame() {
 
         setTitle("Issue Book");
-        setSize(500,300);
+        setSize(500,450);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -87,7 +87,7 @@ public class IssueBookFrame extends JFrame {
         table = new JTable(model);
 
         JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setBounds(500,300,450,120);
+        scrollPane.setBounds(20,250,450,150);
 
         add(scrollPane);
         loadBooks();
@@ -152,7 +152,7 @@ public class IssueBookFrame extends JFrame {
             issuedBook.setStudentId(studentIdField.getText());
             issuedBook.setIssueDate(issueDateField.getText());
 
-            issuedBook.setReturnDate("");
+            issuedBook.setReturnDate(null);
 
             IssueBookDAO dao = new IssueBookDAO();
 

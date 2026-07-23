@@ -24,6 +24,13 @@ public class IssueBookDAO {
             ps.setString(4, book.getIssueDate());
             ps.setString(5, book.getReturnDate());
 
+
+            System.out.println(book.getBookId());
+            System.out.println(book.getStudentName());
+            System.out.println(book.getStudentId());
+            System.out.println(book.getIssueDate());
+            System.out.println(book.getReturnDate());
+
             int rows = ps.executeUpdate();
 
             return rows > 0;
